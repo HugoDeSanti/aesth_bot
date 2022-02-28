@@ -11,7 +11,7 @@ def getCredentials() :
 	# """
 
 	creds = dict() # dictionary to hold everything
-	creds['access_token'] = 'EAAGHAQnIZCQIBAAbqtC6tFlRUSsF1ldS2HKUJx7voAckVitPxlc1spKyIMYTwZBnwjRZA2PVyuPM42Es2wCkZChCXqMGLL0XClZCZBgnBZBj68EvlSaZBA0P8nvc97dQ99E0f2AAt7k9miOZBhMr6lX8AtyTEBRt9aymQzI9o29MQigZDZD' # access token for use with all api calls
+	creds['access_token'] = '' # access token for use with all api calls
 	creds['graph_domain'] = 'https://graph.facebook.com/' # base domain for api calls
 	creds['graph_version'] = 'v13.0' # version of the api we are hitting
 	creds['endpoint_base'] = creds['graph_domain'] + creds['graph_version'] + '/' # base endpoint with domain and version
