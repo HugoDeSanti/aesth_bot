@@ -5,7 +5,7 @@ from datetime import date, datetime, timezone
 import os
 import defines
 
-def scrape(subreddit):
+def scrape(subreddit, requested_imgs):
   #Scrapes top 15 weekly posts
 
 
@@ -19,7 +19,7 @@ def scrape(subreddit):
   
   submissions = reddit.subreddit(subreddit).top("week", limit=40)
   for submission in submissions:
-    if (saved_imgs > 15):
+    if (saved_imgs > requested_imgs):
       break
     if submission.stickied:
       continue
@@ -60,7 +60,6 @@ def scrape(subreddit):
       saved_imgs += 1
     except:
       print(img_filename +  " already in database")
-    cnx.commit()
   
 
   cursor.close()

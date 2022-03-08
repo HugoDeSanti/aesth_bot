@@ -11,7 +11,7 @@ def getCredentials() :
 	# """
 
 	creds = dict() # dictionary to hold everything
-	creds['access_token'] = 'EAAGHAQnIZCQIBAMdZAsssUc3vcUZCbiPY1fqYMBZBOmEIx7HwY00sbITiTzafnOllNN8LiSsifuMIMN5Azwb1EvMcvUROmdLqMRbxZAFa8AjK3AGalKZBviKM5zMKhuazaziic6JzyFgZC8D4MaxhvoeA1nZCfNGiViZCngnUo8J0GgZDZD' # access token for use with all api calls
+	creds['access_token'] = '' # access token for use with all api calls
 	creds['graph_domain'] = 'https://graph.facebook.com/' # base domain for api calls
 	creds['graph_version'] = 'v13.0' # version of the api we are hitting
 	creds['endpoint_base'] = creds['graph_domain'] + creds['graph_version'] + '/' # base endpoint with domain and version
@@ -46,7 +46,7 @@ def makeApiCall( url, endpointParams, type ) :
 	
 def connectMySQL():
 	try:
-		cnx = mysql.connector.connect(user='root', password='bR3SK9eQ76VDWDn', database='aesth_bot_schema', host='localhost')
+		cnx = mysql.connector.connect(user='root', password='bR3SK9eQ76VDWDn', database='aesth_bot_schema', host='localhost', autocommit=True)
 		cursor = cnx.cursor()	
 	except mysql.connector.Error as err:
 		if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -56,3 +56,9 @@ def connectMySQL():
 		else:
 			print(err)
 	return (cnx, cursor)
+
+def updateSQLdb(reddit_img_id):
+	cnx, cursor = connectMySQL()
+	update_stmt = "UPDATE pics SET posted = 1 WHERE reddit_id = %(reddit_img_id)s"
+	cursor.execute(update_stmt, {"reddit_img_id": reddit_img_id})
+	return
